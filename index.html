@@ -136,6 +136,14 @@
             100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
 
+        /* Center the audio player */
+        .audio-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
         /* Hide scrollbars */
         ::-webkit-scrollbar {
             display: none;
@@ -144,12 +152,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Audio element with controls so the song can be played manually -->
-    <audio id="background-audio" controls style="position: absolute; top: 20px; left: 20px;">
-        <source src="./with_you.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-  
     <!-- Card container -->
     <div class="card-container">
         <div class="card" id="card">
@@ -171,6 +173,14 @@
                 <div class="hearts" id="hearts-back"></div>
             </div>
         </div>
+    </div>
+  
+    <!-- Centered audio player below the card -->
+    <div class="audio-container">
+        <audio id="background-audio" controls>
+            <source src="./with_you.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 
     <script>
