@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>For My Forever Love ❤️</title>
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #ffdde1;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        /* Card container with perspective for 3D flip effect */
+        .card-container {
+            perspective: 1000px;
+            position: relative;
+            width: 420px;
+            height: 640px;
+        }
+        /* Card styling */
+        .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #ffdde1;
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(255, 0, 85, 0.3);
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+            cursor: pointer;
+            user-select: none;
+        }
+        /* Flip effect */
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+        /* Front and back sides of the card */
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .front {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+        }
+        .back {
+            transform: rotateY(180deg);
+            background: linear-gradient(45deg, #ff8e8e, #ff6b6b);
+        }
+        h1 {
+            color: #fff;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 10px 0;
+            text-align: center;
+        }
+        p {
+            color: #fff;
+            font-size: 1.2em;
+            margin: 10px;
+            text-align: center;
+            line-height: 1.4;
+        }
+        .photo {
+            width: 90%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            margin: 10px 0;
+        }
+        button {
+            background: #fff;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-family: Arial, sans-serif;
+            color: #ff6b6b;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin: 10px;
+        }
+        button:hover {
+            transform: scale(1.1);
+        }
+        .hidden-message {
+            display: none;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 15px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        /* Floating hearts */
+        .hearts span {
+            position: absolute;
+            color: #ff2d2d;
+            font-size: 1.2em;
+            animation: float 6s linear infinite;
+            opacity: 0;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        /* Hide scrollbars */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Audio element with controls so the song can be played manually -->
+    <audio id="background-audio" controls style="position: absolute; top: 20px; left: 20px;">
+        <source src="./with_you.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+  
+    <!-- Card container -->
+    <div class="card-container">
+        <div class="card" id="card">
+            <div class="front">
+                <div class="hearts" id="hearts"></div>
+                <h1>Happy Valentine's Day, My Precious! 🌹</h1>
+                <p>You are my sunshine, my moon, and all my stars ✨</p>
+                <img src="./my_lll.jpg" alt="A special moment" class="photo">
+                <p>Every moment with you feels like a beautiful dream...</p>
+                <button onclick="showMessageAndFlip(event)">Tap me for more ❤️❤️❤️</button>
+                <div class="hidden-message" id="secret">I fall for you more every day 💖</div>
+            </div>
+            <div class="back">
+                <h1>To My Everything ❤️</h1>
+                <p>"In your eyes I found my home<br>
+                In your heart I found my love<br>
+                In your soul I found my match"</p>
+                <p>Forever yours,<br>Prosper</p>
+                <div class="hearts" id="hearts-back"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Show secret message and flip the card
+        function showMessageAndFlip(e) {
+            e.stopPropagation();
+            const card = document.getElementById('card');
+            const message = document.getElementById('secret');
+            message.style.display = 'block';
+            card.classList.toggle('flipped');
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 4000);
+        }
+        
+        // Toggle card flip on click
+        document.getElementById('card').addEventListener('click', function(e) {
+            this.classList.toggle('flipped');
+        });
+
+        // Create floating hearts
+        function createHearts(containerId) {
+            const container = document.getElementById(containerId);
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('span');
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                container.appendChild(heart);
+            }
+        }
+      
+        // Initialize floating hearts
+        createHearts('hearts');
+        createHearts('hearts-back');
+    </script>
+</body>
+</html>
